@@ -1,13 +1,18 @@
 const express = require('express')
+const compress = require('compress')
 const volleyball = require('volleyball')
 const bodyParser = require('body-parser')
 const path = require('path')
 
-const PORT = process.env.PORT || 8080
 const app = express()
 module.exports = app
 
-if (process.env.NODE_ENV === 'development') require('../secrets')
+const {
+  PORT = 8080,
+  NODE_ENV
+} = process.env
+
+if (NODE_ENV === 'development') require('../secrets')
 
 /*
  * Parse application/x-www-form-urlencoded && application/json
@@ -26,6 +31,9 @@ app.use(bodyParser.urlencoded({verify: rawBodyBuffer, extended: true }))
 app.use(bodyParser.json({ verify: rawBodyBuffer }))
 app.use(volleyball)
 
+// Enable gzip compression in production
+if (NODE_ENV === 'production') app.use(compress())
+
 app.use('/api', require('./api'))
 
 // Serve the landing page for all requests
@@ -35,12 +43,10 @@ app.get('*', (req, res) => {
 
 // Error Handling
 app.use((error, req, res) => {
-  // eslint-disable-next-line
   console.error(error)
   res.status(error.status || 500).send(error.message || 'Internal server error')
 })
 
 app.listen(PORT, () => {
-  // eslint-disable-next-line
   console.log(`Keep calm and deploy on ${PORT}`)
 })

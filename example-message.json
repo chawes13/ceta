@@ -1,0 +1,68 @@
+[
+  {
+    "type": "section",
+    "text": {
+      "type": "mrkdwn",
+      "text": "C(E)TA Arrival Estimates for: *FULLERTON RED*"
+    }
+  },
+  {
+    "type": "divider"
+  },
+  {
+    "type": "section",
+    "text": {
+      "type": "mrkdwn",
+      "text": ":red_circle: *RED LINE*"
+    }
+  },
+  {
+    "type": "section",
+    "fields": [
+      {
+        "type": "mrkdwn",
+        "text": "*HOWARD* \n DUE \n 4 minutes \n 17 minutes"
+      },
+      {
+        "type": "mrkdwn",
+        "text": "*95th* \n 3 minutes \n 5 minutes \n 17 minutes (delayed)"
+      }
+    ]
+  },
+  {
+    "type": "divider"
+  },
+  {
+    "type": "section",
+    "text": {
+      "type": "mrkdwn",
+      "text": ":bear: *BROWN LINE*"
+    }
+  },
+  {
+    "type": "section",
+    "fields": [
+      {
+        "type": "mrkdwn",
+        "text": "*KIMBALL* \n DUE \n 4 minutes \n 17 minutes"
+      },
+      {
+        "type": "mrkdwn",
+        "text": "*LOOP* \n 3 minutes \n 5 minutes \n 17 minutes (delayed)"
+      }
+    ]
+  },
+  {
+    "type": "divider"
+  },
+  {
+    "type": "context",
+    "elements": [
+      {
+        "type": "plain_text",
+        "text": ":stopwatch: Generated at 8:15 pm",
+        "emoji": true
+      }
+    ]
+  }
+]

@@ -19,16 +19,15 @@ router.post('/command', async (req, res, next) => {
   try {
     // if (!signature.isVerified(req)) return res.sendStatus(401)
     
-    const { text, trigger_id, response_url } = req.body
-    const commands = parser.parseCommand(text)
-    
+    const { text: userInput } = req.body
+    const commands = parser.parseCommand(userInput)
     const ids = await trains.getUniqueIdentifier(commands)
     
     // Respond with a 200 to the Slack app acknowledging receipt of an appropriately formatted command
     // res.sendStatus(200) -- this only needs to be enabled if the CTA APIs are too slow
     
-    const arrivalsByStop = await trains.calculateArrivalsByStop(commands, ids)
-    const formattedMsg = formatter.createSlackMessage(arrivalsByStop)
+    const times = await trains.calculateArrivals(commands, ids)
+    const formattedMsg = formatter.createSlackMessage(userInput, times)
     
     res.json(formattedMsg)
   } catch (e) {

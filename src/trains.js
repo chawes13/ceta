@@ -3,6 +3,7 @@ const { differenceInMinutes } = require('date-fns')
 const { groupBy } = require('lodash')
 const { compose, set } = require('lodash/fp')
 const { setIf, HttpError } = require('./utils')
+const { trainLineCodes } = require('./config')
 
 const {
   CTA_TRAIN_TRACKER_API_URL,
@@ -10,15 +11,6 @@ const {
   CTA_TRAIN_STOP_API_URL,
   CTA_TRAIN_STOP_API_TOKEN,
 } = process.env
-
-const trainLineCodes = {
-  PURPLE: 'p',
-  PINK: 'pnk',
-  RED: 'red',
-  ORANGE: 'o',
-  BLUE: 'blue',
-  BROWN: 'brn',
-}
 
 // Returns with a mapid (station) or a stpid (platform), depending on how specific the user's request was
 async function getUniqueIdentifier (commands) {
@@ -35,7 +27,7 @@ async function getUniqueIdentifier (commands) {
 }
 
 // Returns calculated arrival times, organized by stop
-async function calculateArrivalsByStop (commands, ids) {
+async function calculateArrivals (commands, ids) {
   const { data: trainTackerResults } = await getTrainTimes(commands, ids)
   const times = trainTackerResults.ctatt.eta
   if (!times || times.length === 0) throw new HttpError(500, 'Could not retrieve latest arrival information')
@@ -47,7 +39,7 @@ async function calculateArrivalsByStop (commands, ids) {
     return set('timeToArrival', timeToArrival, time)
   })
   
-  return groupBy(mappedTimes, 'stpId')
+  return mappedTimes
 }
 
 // ----- PRIVATE -----
@@ -80,6 +72,6 @@ function getTrainTimes (commands, ids) {
 }
 
 module.exports = {
-  calculateArrivalsByStop,
+  calculateArrivals,
   getUniqueIdentifier,
 }
