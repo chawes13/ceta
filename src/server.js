@@ -1,5 +1,5 @@
 const express = require('express')
-const compress = require('compress')
+const compression = require('compression')
 const volleyball = require('volleyball')
 const bodyParser = require('body-parser')
 const path = require('path')
@@ -32,7 +32,7 @@ app.use(bodyParser.json({ verify: rawBodyBuffer }))
 app.use(volleyball)
 
 // Enable gzip compression in production
-if (NODE_ENV === 'production') app.use(compress())
+if (NODE_ENV === 'production') app.use(compression())
 
 app.use('/api', require('./api'))
 
