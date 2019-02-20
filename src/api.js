@@ -1,5 +1,5 @@
 const router = require('express').Router()
-// const signature = require('./signature')
+const signature = require('./signature')
 const parser = require('./parser')
 const trains = require('./trains')
 const formatter = require('./formatter')
@@ -17,7 +17,7 @@ module.exports = router
  */
 router.post('/command', async (req, res, next) => {
   try {
-    // if (!signature.isVerified(req)) return res.sendStatus(401)
+    if (!signature.isVerified(req)) return res.sendStatus(401)
     
     const { text: userInput } = req.body
     const commands = parser.parseCommand(userInput)

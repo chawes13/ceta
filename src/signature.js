@@ -8,6 +8,9 @@ const { SLACK_SIGNING_SECRET } = process.env
 function isVerified (req) {
   const signature = req.headers['x-slack-signature']
   const timestamp = req.headers['x-slack-request-timestamp']
+  
+  if (!signature) return false
+  
   const hmac = crypto.createHmac('sha256', SLACK_SIGNING_SECRET)
   const [version, hash] = signature.split('=')
   
