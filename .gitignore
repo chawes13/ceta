@@ -1,3 +1,4 @@
 node_modules
 secrets.js
 yarn-error.log
+dist

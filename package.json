@@ -6,7 +6,9 @@
   "author": "Conor Hawes",
   "license": "MIT",
   "scripts": {
-    "start": "NODE_ENV='development' nodemon src/server.js --exec babel-node",
+    "build": "babel ./src -d dist",
+    "start": "yarn build && node dist/server.js",
+    "start-dev": "NODE_ENV='development' nodemon src/server.js --exec babel-node",
     "lint": "eslint ./src"
   },
   "dependencies": {
