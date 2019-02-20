@@ -9,7 +9,7 @@ module.exports = app
 
 const {
   PORT = 8080,
-  NODE_ENV
+  NODE_ENV = 'development'
 } = process.env
 
 if (NODE_ENV === 'development') require('../secrets')
