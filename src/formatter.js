@@ -22,7 +22,7 @@ function createMessage (userInput, response) {
   const header = createSection('C(E)TA Arrival Estimates for: ' + userInput)
   const formattedTimes = map(timesByLineAndDest, (dests, line) => {
     const emoji = getTrainLineEmoji(line)
-    const sectionHeader = createSection(`${emoji} *${trainLines[line.toUpperCase()]} Line* ${emoji}`)
+    const sectionHeader = createSection(`${emoji} *${trainLines[line.toUpperCase()]} Line*`)
     const fields = map(dests, (trains, dest) => {
       return `*${dest}* \n ${trains.map(train => train.timeToArrival).join('\n ')}`
     })
