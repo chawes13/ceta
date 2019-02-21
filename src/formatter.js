@@ -15,14 +15,14 @@ const baseMsg = {
  * 2. Group by stop
  * 3. Format message
  */
-function createSlackMessage (userInput, response) {
+function createMessage (userInput, response) {
   const timesByLine = groupBy(response, 'rt')
   const timesByLineAndDest = mapValues(timesByLine, (vals) => groupBy(vals, 'destNm'))
   
   const header = createSection('C(E)TA Arrival Estimates for: ' + userInput)
   const formattedTimes = map(timesByLineAndDest, (dests, line) => {
     const emoji = getTrainLineEmoji(line)
-    const sectionHeader = createSection(`${emoji} *${trainLines[line.toUpperCase()]} Line* ${emoji}`)
+    const sectionHeader = createSection(`${emoji} *${trainLines[line.toUpperCase()]} Line*`)
     const fields = map(dests, (trains, dest) => {
       return `*${dest}* \n ${trains.map(train => train.timeToArrival).join('\n ')}`
     })
@@ -82,4 +82,4 @@ function createContext (text, type="mrkdwn") {
   }
 }
 
-module.exports = { createSlackMessage }
+module.exports = { createMessage }
