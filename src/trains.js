@@ -46,7 +46,7 @@ async function calculateArrivals (commands, ids) {
 
 function findStops ({ station, line='', direction='' }) {
   const params = compose(
-    set('$where', `UPPER(station_descriptive_name) like '%${station}%%${line}%'`),
+    set('$where', `UPPER(station_descriptive_name) like '%${station.join('%%')}%%${line}%'`),
     setIf(trainLineCodes[line], trainLineCodes[line], true),
     setIf(!!direction, 'direction_id', direction)
   )({})
