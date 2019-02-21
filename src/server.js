@@ -3,6 +3,7 @@ const compression = require('compression')
 const volleyball = require('volleyball')
 const bodyParser = require('body-parser')
 const path = require('path')
+const { isVerified } = require('./middleware')
 
 const app = express()
 module.exports = app
@@ -35,7 +36,7 @@ app.use(express.static(path.join(__dirname, '..', 'public')))
 // Enable gzip compression in production
 if (NODE_ENV === 'production') app.use(compression())
 
-app.use('/api', require('./api'))
+app.use('/api', isVerified, require('./api'))
 
 // Serve the landing page for all requests
 app.get('*', (req, res) => {
