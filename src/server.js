@@ -43,9 +43,8 @@ app.get('*', (req, res) => {
 })
 
 // Error Handling
-app.use((error, req, res) => {
-  console.error(error)
-  res.status(error.status || 500).send(error.message || 'Internal server error')
+app.use((error, req, res, next) => {
+  res.status(error.status || 500).send({ errors: error || 'Internal server error' })
 })
 
 app.listen(PORT, () => {
