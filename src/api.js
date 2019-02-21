@@ -1,5 +1,4 @@
 const router = require('express').Router()
-const signature = require('./signature')
 const parser = require('./parser')
 const trains = require('./trains')
 const formatter = require('./formatter')
@@ -8,18 +7,14 @@ module.exports = router
 
 /**
  * Returns estimated train times
- * 1. Verifies signature
- * 2. Parses text to break out a user's commands
- * 3. Queries the CTA L Stop API to find the station/stop identifier to use
- * 4. Queries the CTA Train Tracker API to find the train times
- * 5. Formats response to meet message syntax
- * 6. Sends formatted message to slack channel
+ * 1. Parses text to break out a user's commands
+ * 2. Queries the CTA L Stop API to find the station/stop identifier to use
+ * 3. Queries the CTA Train Tracker API to find the train times
+ * 4. Formats response to meet message syntax
+ * 5. Sends formatted message to slack channel
  */
 router.post('/command', async (req, res, next) => {
   try {
-    // Reject the request if it is not sent from an authorized Slack workspace
-    if (!signature.isVerified(req)) return res.sendStatus(401)
-    
     const { text: userInput } = req.body
     
     // Parse the commands based on an agreed structure
