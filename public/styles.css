@@ -1,0 +1,13 @@
+body {
+  font-family: Helvetica, sans-serif;
+}
+
+main {
+  margin: 3em auto;
+  width: 60%;
+  max-width: 740px;
+}
+
+h1 {
+  text-align: center;
+}

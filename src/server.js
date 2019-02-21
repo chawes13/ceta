@@ -12,6 +12,7 @@ const {
   NODE_ENV = 'development'
 } = process.env
 
+// Use a secrets file in the app's root directory to set ENV variables in development
 if (NODE_ENV === 'development') require('../secrets')
 
 /*
@@ -19,7 +20,6 @@ if (NODE_ENV === 'development') require('../secrets')
  * Use body-parser's `verify` callback to export a parsed raw body
  * that you need to use to verify the signature
  */
-
 const rawBodyBuffer = (req, res, buf, encoding) => {
   if (buf && buf.length) {
     req.rawBody = buf.toString(encoding || 'utf8')
@@ -27,9 +27,10 @@ const rawBodyBuffer = (req, res, buf, encoding) => {
 }
 
 // Configure Middleware
-app.use(bodyParser.urlencoded({verify: rawBodyBuffer, extended: true }))
+app.use(bodyParser.urlencoded({ verify: rawBodyBuffer, extended: true }))
 app.use(bodyParser.json({ verify: rawBodyBuffer }))
 app.use(volleyball)
+app.use(express.static(path.join(__dirname, '..', 'public')))
 
 // Enable gzip compression in production
 if (NODE_ENV === 'production') app.use(compression())

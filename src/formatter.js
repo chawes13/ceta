@@ -15,7 +15,7 @@ const baseMsg = {
  * 2. Group by stop
  * 3. Format message
  */
-function createSlackMessage (userInput, response) {
+function createMessage (userInput, response) {
   const timesByLine = groupBy(response, 'rt')
   const timesByLineAndDest = mapValues(timesByLine, (vals) => groupBy(vals, 'destNm'))
   
@@ -82,4 +82,4 @@ function createContext (text, type="mrkdwn") {
   }
 }
 
-module.exports = { createSlackMessage }
+module.exports = { createMessage }

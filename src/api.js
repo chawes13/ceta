@@ -17,17 +17,22 @@ module.exports = router
  */
 router.post('/command', async (req, res, next) => {
   try {
+    // Reject the request if it is not sent from an authorized Slack workspace
     if (!signature.isVerified(req)) return res.sendStatus(401)
     
     const { text: userInput } = req.body
+    
+    // Parse the commands based on an agreed structure
     const commands = parser.parseCommand(userInput)
+    
+    // Validate that a station / stop can be located by the CTA "L" Stop API
     const ids = await trains.getUniqueIdentifier(commands)
     
-    // Respond with a 200 to the Slack app acknowledging receipt of an appropriately formatted command
-    // res.sendStatus(200) -- this only needs to be enabled if the CTA APIs are too slow
-    
+    // Fetch the times available and filter based on train line (if provided)
     const times = await trains.calculateArrivals(commands, ids)
-    const formattedMsg = formatter.createSlackMessage(userInput, times)
+    
+    // Format the message according to the JSON specs provided by the Slack API
+    const formattedMsg = formatter.createMessage(userInput, times)
     
     res.json(formattedMsg)
   } catch (e) {
