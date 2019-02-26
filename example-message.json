@@ -1,68 +1,93 @@
-[
-  {
-    "type": "section",
-    "text": {
-      "type": "mrkdwn",
-      "text": "C(E)TA Arrival Estimates for: *FULLERTON RED*"
-    }
-  },
-  {
-    "type": "divider"
-  },
-  {
-    "type": "section",
-    "text": {
-      "type": "mrkdwn",
-      "text": ":red_circle: *RED LINE*"
-    }
-  },
-  {
-    "type": "section",
-    "fields": [
+{
+  "response_type": "ephemeral",
+  "text": "C(E)TA Arrival Estimates",
+  "blocks": [
       {
-        "type": "mrkdwn",
-        "text": "*HOWARD* \n DUE \n 4 minutes \n 17 minutes"
+          "type": "section",
+          "text": {
+              "type": "mrkdwn",
+              "text": "Arrival Estimates for: \"*fullerton*\""
+          }
       },
       {
-        "type": "mrkdwn",
-        "text": "*95th* \n 3 minutes \n 5 minutes \n 17 minutes (delayed)"
-      }
-    ]
-  },
-  {
-    "type": "divider"
-  },
-  {
-    "type": "section",
-    "text": {
-      "type": "mrkdwn",
-      "text": ":bear: *BROWN LINE*"
-    }
-  },
-  {
-    "type": "section",
-    "fields": [
-      {
-        "type": "mrkdwn",
-        "text": "*KIMBALL* \n DUE \n 4 minutes \n 17 minutes"
+          "type": "divider"
       },
       {
-        "type": "mrkdwn",
-        "text": "*LOOP* \n 3 minutes \n 5 minutes \n 17 minutes (delayed)"
-      }
-    ]
-  },
-  {
-    "type": "divider"
-  },
-  {
-    "type": "context",
-    "elements": [
+          "type": "section",
+          "text": {
+              "type": "mrkdwn",
+              "text": ":red_circle: *Service toward Howard*"
+          }
+      },
       {
-        "type": "plain_text",
-        "text": ":stopwatch: Generated at 8:15 pm",
-        "emoji": true
+          "type": "section",
+          "text": {
+              "type": "mrkdwn",
+              "text": "DUE (Red)\n5 minutes (Red)\n15 minutes (Red)"
+          }
+      },
+      {
+          "type": "divider"
+      },
+      {
+          "type": "section",
+          "text": {
+              "type": "mrkdwn",
+              "text": ":red_circle: *Service toward 95th/Dan Ryan*"
+          }
+      },
+      {
+          "type": "section",
+          "text": {
+              "type": "mrkdwn",
+              "text": "8 minutes (Red)\n17 minutes (Red)"
+          }
+      },
+      {
+          "type": "divider"
+      },
+      {
+          "type": "section",
+          "text": {
+              "type": "mrkdwn",
+              "text": ":bear: *Service toward Kimball or Linden*"
+          }
+      },
+      {
+          "type": "section",
+          "text": {
+              "type": "mrkdwn",
+              "text": "4 minutes (Brown)\n15 minutes (Brown)"
+          }
+      },
+      {
+          "type": "divider"
+      },
+      {
+          "type": "section",
+          "text": {
+              "type": "mrkdwn",
+              "text": ":bear: *Service toward Loop*"
+          }
+      },
+      {
+          "type": "section",
+          "text": {
+              "type": "mrkdwn",
+              "text": "6 minutes (Brown)\n13 minutes (Brown)"
+          }
+      },
+      {
+          "type": "divider"
+      },
+      {
+          "type": "context",
+          "elements": [
+              {
+                  "type": "mrkdwn",
+                  "text": ":stopwatch: Estimates generated at 08:21:26"
+              }
+          ]
       }
-    ]
-  }
-]
+  ]
+}
