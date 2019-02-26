@@ -32,7 +32,7 @@ would return something like
             "type": "section",
             "text": {
                 "type": "mrkdwn",
-                "text": "C(E)TA Arrival Estimates for: fullerton // brown"
+                "text": "Arrival Estimates for: \"*fullerton*\""
             }
         },
         {
@@ -42,21 +42,66 @@ would return something like
             "type": "section",
             "text": {
                 "type": "mrkdwn",
-                "text": ":bear: *Brown Line*"
+                "text": ":red_circle: *Service toward Howard*"
             }
         },
         {
             "type": "section",
-            "fields": [
-                {
-                    "type": "mrkdwn",
-                    "text": "*Loop* \n 7 minutes\n 16 minutes"
-                },
-                {
-                    "type": "mrkdwn",
-                    "text": "*Kimball* \n 10 minutes\n 17 minutes"
-                }
-            ]
+            "text": {
+                "type": "mrkdwn",
+                "text": "DUE (Red)\n5 minutes (Red)\n15 minutes (Red)"
+            }
+        },
+        {
+            "type": "divider"
+        },
+        {
+            "type": "section",
+            "text": {
+                "type": "mrkdwn",
+                "text": ":red_circle: *Service toward 95th/Dan Ryan*"
+            }
+        },
+        {
+            "type": "section",
+            "text": {
+                "type": "mrkdwn",
+                "text": "8 minutes (Red)\n17 minutes (Red)"
+            }
+        },
+        {
+            "type": "divider"
+        },
+        {
+            "type": "section",
+            "text": {
+                "type": "mrkdwn",
+                "text": ":bear: *Service toward Kimball or Linden*"
+            }
+        },
+        {
+            "type": "section",
+            "text": {
+                "type": "mrkdwn",
+                "text": "4 minutes (Brown)\n15 minutes (Brown)"
+            }
+        },
+        {
+            "type": "divider"
+        },
+        {
+            "type": "section",
+            "text": {
+                "type": "mrkdwn",
+                "text": ":bear: *Service toward Loop*"
+            }
+        },
+        {
+            "type": "section",
+            "text": {
+                "type": "mrkdwn",
+                "text": "6 minutes (Brown)\n13 minutes (Brown)"
+            }
         },
         {
             "type": "divider"
@@ -66,15 +111,19 @@ would return something like
             "elements": [
                 {
                     "type": "mrkdwn",
-                    "text": ":stopwatch: Estimates generated at 09:45:45"
+                    "text": ":stopwatch: Estimates generated at 08:21:26"
                 }
             ]
+        },
+        {
+            "type": "divider"
         }
     ]
 }
 ```
 which in Slack looks something like
-<insert image>
+
+<a href="https://cl.ly/d430990a9efd" target="_blank"><img src="https://d2y84jyh761mlc.cloudfront.net/items/222W0P353r1X3d0N3L2u/Image%202019-02-25%20at%208.28.24%20PM.png" style="display: block;height: auto;width: 100%;"/></a>
 
 ## Local Development
 To run this project locally, create a `secrets.js` file in the root directory with the following environment variables:
