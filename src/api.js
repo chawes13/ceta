@@ -13,7 +13,7 @@ module.exports = router
  * 4. Formats response to meet message syntax
  * 5. Sends formatted message to slack channel
  */
-router.post('/command', async (req, res, next) => {
+router.post('/command', async (req, res) => {
   try {
     const { text: userInput } = req.body
     
@@ -31,6 +31,7 @@ router.post('/command', async (req, res, next) => {
     
     res.json(formattedMsg)
   } catch (e) {
-    next(e)
+    const formattedErrorMsg = formatter.createErrorMessage(e)
+    res.json(formattedErrorMsg)
   }
 })

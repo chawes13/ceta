@@ -43,6 +43,18 @@ function createMessage (userInput, response) {
   return set('blocks', blocks, baseMsg)
 }
 
+/*
+ * Slack expects a 200 response so format errors accordingly to inform the user
+ * what went wrong
+ */
+function createErrorMessage (error) {
+  return {
+    ...baseMsg,
+    text: 'Error',
+    blocks: [ createSection(`:no_entry: ${error.toString() || 'Internal server error'}`) ]
+  }
+}
+
 // ----- PRIVATE -----
 
 function createSection (textInput, type="mrkdwn") {
@@ -81,4 +93,7 @@ function createContext (text, type="mrkdwn") {
   }
 }
 
-module.exports = { createMessage }
+module.exports = {
+  createMessage,
+  createErrorMessage,
+}

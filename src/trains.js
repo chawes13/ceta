@@ -15,10 +15,10 @@ const {
 // Returns with a mapid (station) or a stpid (platform), depending on how specific the user's request was
 async function getUniqueIdentifier (commands) {
   const { data: stops } = await findStops(commands)
-  if (!stops || stops.length === 0) throw new HttpError(400, 'Station not found')
+  if (!stops || stops.length === 0) throw new HttpError(400, 'Station not found. Please try a different search phrase.')
   
   const stopsByStation = groupBy(stops, 'map_id')
-  if (Object.keys(stopsByStation).length > 1) throw new HttpError(400, 'Found multiple stations matching criteria')
+  if (Object.keys(stopsByStation).length > 1) throw new HttpError(400, 'Found multiple stations matching the provided criteria. Please be more specific.')
   
   // If multiple stops / platforms are returned, then only provide the Station Id
   if (stops.length > 1) return { mapid: stops[0].map_id }
@@ -30,7 +30,7 @@ async function getUniqueIdentifier (commands) {
 async function calculateArrivals (commands, ids) {
   const { data: trainTackerResults } = await getTrainTimes(commands, ids)
   const times = trainTackerResults.ctatt.eta
-  if (!times || times.length === 0) throw new HttpError(500, 'Could not retrieve latest arrival information')
+  if (!times || times.length === 0) throw new HttpError(500, 'Could not retrieve latest arrival information. Please try again.')
   
   const mappedTimes = times.map(time => {
     if (Number(time.isApp)) return set('timeToArrival', 'DUE', time)
