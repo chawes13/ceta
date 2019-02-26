@@ -1,6 +1,6 @@
 // Slack message formatting goes here -- refer to ./example-message.json
 
-const { groupBy, flatten, map, mapValues } = require('lodash')
+const { groupBy, flatten, map, uniqBy } = require('lodash')
 const { set } = require('lodash/fp')
 const { format } = require('date-fns')
 const { getTrainLineEmoji, trainLines } = require('./config')
@@ -11,21 +11,20 @@ const baseMsg = {
 }
 
 /**
- * 1. Group by line
- * 2. Group by stop
- * 3. Format message
+ * 1. Group by stop
+ * 2. Format message according to Slack's Block Kit API
  */
 function createMessage (userInput, response) {
-  const timesByLine = groupBy(response, 'rt')
-  const timesByLineAndDest = mapValues(timesByLine, (vals) => groupBy(vals, 'destNm'))
+  const trainsByStop = groupBy(response, 'stpId')
   
-  const header = createSection('C(E)TA Arrival Estimates for: ' + userInput)
-  const formattedTimes = map(timesByLineAndDest, (dests, line) => {
-    const emoji = getTrainLineEmoji(line)
-    const sectionHeader = createSection(`${emoji} *${trainLines[line.toUpperCase()]} Line*`)
-    const fields = map(dests, (trains, dest) => {
-      return `*${dest}* \n ${trains.map(train => train.timeToArrival).join('\n ')}`
-    })
+  const header = createSection('Arrival Estimates for: ' + '"*' + userInput + '*"')
+  const formattedTimes = map(trainsByStop, (trains) => {
+    const rtEmojis = uniqBy(trains, 'rt').map(train => getTrainLineEmoji(train.rt))
+    
+    const sectionHeader = createSection(`${rtEmojis.join('/')} *${trains[0].stpDe}*`)
+    const fields = trains.map(train => {
+      return `${train.timeToArrival} (${trainLines[train.rt.toUpperCase()]})`
+    }).join('\n')
     
     return [
       sectionHeader,
@@ -33,7 +32,7 @@ function createMessage (userInput, response) {
       createDivider(),
     ]
   })
-  
+
   const blocks = [
     header,
     createDivider(),

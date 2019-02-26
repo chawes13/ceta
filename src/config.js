@@ -23,7 +23,7 @@ const trainLineEmojis = {
   BRN: ':bear:',
   O: ':tangerine:',
   PNK: ':cherry_blossom:',
-  P: ':eggplant:',
+  P: ':imp:',
   RED: ':red_circle:',
 }
 
