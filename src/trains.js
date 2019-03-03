@@ -3,7 +3,7 @@ const { differenceInMinutes } = require('date-fns')
 const { groupBy } = require('lodash')
 const { compose, set } = require('lodash/fp')
 const { setIf, HttpError } = require('./utils')
-const { trainLineCodes } = require('./config')
+const { chicagoDataPortalApi, ctaTrainTrackerApi } = require('./config')
 
 const {
   CTA_TRAIN_TRACKER_API_URL,
@@ -47,7 +47,7 @@ async function calculateArrivals (commands, ids) {
 function findStops ({ station, line='', direction='' }) {
   const params = compose(
     set('$where', `UPPER(station_descriptive_name) like '%${station.join('%%')}%%${line}%'`),
-    setIf(trainLineCodes[line], trainLineCodes[line], true),
+    setIf(chicagoDataPortalApi.trainLineCodes[line], chicagoDataPortalApi.trainLineCodes[line], true),
     setIf(!!direction, 'direction_id', direction)
   )({})
   
@@ -60,7 +60,7 @@ function findStops ({ station, line='', direction='' }) {
 }
 
 function getTrainTimes (commands, ids) {
-  const trainLineCode = trainLineCodes[commands.line]
+  const trainLineCode = ctaTrainTrackerApi.trainLineCodes[commands.line]
   const params = setIf(trainLineCode, 'rt', trainLineCode)({
     key: CTA_TRAIN_TRACKER_API_KEY,
     outputType: 'JSON',

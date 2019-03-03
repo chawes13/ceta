@@ -3,7 +3,7 @@
 const { groupBy, flatten, map, uniqBy } = require('lodash')
 const { set } = require('lodash/fp')
 const { format } = require('date-fns')
-const { getTrainLineEmoji, trainLines } = require('./config')
+const { getTrainLineEmoji, ctaTrainTrackerApi } = require('./config')
 
 const baseMsg = {
   response_type: 'ephemeral',
@@ -23,7 +23,7 @@ function createMessage (userInput, response) {
     
     const sectionHeader = createSection(`${rtEmojis.join('/')} *${trains[0].stpDe}*`)
     const fields = trains.map(train => {
-      return `${train.timeToArrival} (${trainLines[train.rt.toUpperCase()]})`
+      return `${train.timeToArrival} (${ctaTrainTrackerApi.trainLines[train.rt.toUpperCase()]})`
     }).join('\n')
     
     return [

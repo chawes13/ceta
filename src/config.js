@@ -1,36 +1,57 @@
 // Constants go here
 
-const trainLineCodes = {
-  BLUE: 'blue',
-  BROWN: 'brn',
-  ORANGE: 'o',
-  PINK: 'pnk',
-  PURPLE: 'p',
-  RED: 'red',
+const chicagoDataPortalApi = {
+  trainLineCodes: {
+    RED: 'red',
+    BLUE: 'blue',
+    GREEN: 'g',
+    BROWN: 'brn',
+    PURPLE: 'p',
+    ORANGE: 'o',
+    PINK: 'pnk',
+    YELLOW: 'y',
+  }
 }
 
-const trainLines = {
-  BLUE: 'Blue',
-  BRN: 'Brown',
-  O: 'Orange',
-  PNK: 'Pink',
-  P: 'Purple',
-  RED: 'Red',
+const ctaTrainTrackerApi = {
+  trainLineCodes: {
+    RED: 'Red',
+    BLUE: 'Blue',
+    BROWN: 'Brn',
+    GREEN: 'G',
+    ORANGE: 'Org',
+    PURPLE: 'P',
+    PINK: 'Pink',
+    YELLOW: 'Y',
+  },
+  trainLines: {
+    RED: 'Red',
+    BLUE: 'Blue',
+    BRN: 'Brown',
+    G: 'Green',
+    ORG: 'Orange',
+    P: 'Purple',
+    PINK: 'Pink',
+    Y: 'Yellow',
+  },
+  trainLineEmojis: {
+    RED: ':red_circle:',
+    BLUE: ':large_blue_diamond:',
+    BRN: ':bear:',
+    G: ':green_apple:',
+    ORG: ':tangerine:',
+    P: ':imp:',
+    PINK: ':cherry_blossom:',
+    Y: ':baby_chick:',
+  }
 }
 
-const trainLineEmojis = {
-  BLUE: ':large_blue_diamond:',
-  BRN: ':bear:',
-  O: ':tangerine:',
-  PNK: ':cherry_blossom:',
-  P: ':imp:',
-  RED: ':red_circle:',
+const getTrainLineEmoji = (line) => {
+  return ctaTrainTrackerApi.trainLineEmojis[line.toUpperCase()] || ''
 }
-
-const getTrainLineEmoji = (line) => trainLineEmojis[line.toUpperCase()] || ''
 
 module.exports = {
-  trainLineCodes,
+  chicagoDataPortalApi,
+  ctaTrainTrackerApi,
   getTrainLineEmoji,
-  trainLines,
 }
