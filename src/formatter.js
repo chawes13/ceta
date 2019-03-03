@@ -19,9 +19,9 @@ function createMessage (userInput, response) {
   
   const header = createSection('Arrival Estimates for: ' + '"*' + userInput + '*"')
   const formattedTimes = map(trainsByStop, (trains) => {
-    const rtEmojis = uniqBy(trains, 'rt').map(train => getTrainLineEmoji(train.rt))
+    const rtEmojis = uniqBy(trains, 'rt').sort((a, b )=> a > b).map(train => getTrainLineEmoji(train.rt))
     
-    const sectionHeader = createSection(`${rtEmojis.join('/')} *${trains[0].stpDe}*`)
+    const sectionHeader = createSection(`*${trains[0].stpDe}* \n ${rtEmojis.join('/')}`)
     const fields = trains.map(train => {
       return `${train.timeToArrival} (${ctaTrainTrackerApi.trainLines[train.rt.toUpperCase()]})`
     }).join('\n')
