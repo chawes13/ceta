@@ -35,7 +35,6 @@ function createMessage (userInput, response) {
 
   const blocks = [
     header,
-    createDivider(),
     ...flatten(formattedTimes),
     createContext(':stopwatch: Estimates generated at ' + format(Date.now(), 'hh:mm:ss'))
   ]
