@@ -1,0 +1,65 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Formats messages correctly for Slack Create Message Creates a message matching Slack's Block API kit syntax: slack-block-api 1`] = `
+Object {
+  "blocks": Array [
+    Object {
+      "text": Object {
+        "text": "Arrival Estimates for: \\"*fullerton // red*\\"",
+        "type": "mrkdwn",
+      },
+      "type": "section",
+    },
+    Object {
+      "text": Object {
+        "text": "*Service toward Howard* 
+ :red_circle:",
+        "type": "mrkdwn",
+      },
+      "type": "section",
+    },
+    Object {
+      "text": Object {
+        "text": "7 minutes (Red)
+21 minutes (Red)",
+        "type": "mrkdwn",
+      },
+      "type": "section",
+    },
+    Object {
+      "type": "divider",
+    },
+    Object {
+      "text": Object {
+        "text": "*Service toward 95th/Dan Ryan* 
+ :red_circle:",
+        "type": "mrkdwn",
+      },
+      "type": "section",
+    },
+    Object {
+      "text": Object {
+        "text": "DUE (Red)
+9 minutes (Red)
+15 minutes (Red)",
+        "type": "mrkdwn",
+      },
+      "type": "section",
+    },
+    Object {
+      "type": "divider",
+    },
+    Object {
+      "elements": Array [
+        Object {
+          "text": ":stopwatch: Estimates generated at 03:24:13",
+          "type": "mrkdwn",
+        },
+      ],
+      "type": "context",
+    },
+  ],
+  "response_type": "ephemeral",
+  "text": "C(E)TA Arrival Estimates",
+}
+`;
