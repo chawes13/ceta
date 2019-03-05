@@ -1,4 +1,3 @@
-
 /**
  * Expected format: station // line // direction (N, S)
  * This will allow a user to specify a specific line at stations like Chicago, 
@@ -13,7 +12,7 @@ function parseCommand (command) {
   const [station, line, direction] = command.toUpperCase().split('//').map(trim)
   
   return {
-    station: station.split(' '), // Allow for multiple keywords (e.g., chicago brown)
+    station: station.split(' ').filter(ch => ch !== ''), // Allow for multiple keywords (e.g., chicago brown)
     line,
     direction: trimDirection(direction) // CTA API only takes 1 letter arguments
   }
