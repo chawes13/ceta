@@ -40,7 +40,7 @@ const ctaTrainTrackerApi = {
     BRN: ':bear:',
     G: ':green_apple:',
     ORG: ':tangerine:',
-    P: ':imp:',
+    P: ':smiling_imp:',
     PINK: ':cherry_blossom:',
     Y: ':baby_chick:',
   }
